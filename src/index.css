@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: whitesmoke;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+
+header>ul {
+    width: 50%;
+    display: flex;
+    list-style: none;
+
+    border: 1px solid blueviolet;
+    border-radius: 20px;
+    height: 2.5rem;
+    background: rgba(132, 0, 255, 0.139);
+}
+
+header>ul>li {
+    height: 100%;
+}
+
+header>ul>li:nth-of-type(1) {
+    width: 60%;
+}
+
+header>ul>li:nth-of-type(2) {
+    width: 20%;
+}
+
+header>ul>li:nth-of-type(3) {
+    width: 20%;
+}
+
+header>ul>li>span {
+    height: 100%;
+    display: inline-block;
+    width: auto;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    /* background: blueviolet; */
+    color: blueviolet;
+    font-weight: 800;
+    border-radius: 20px;
+    transition: 200ms ease-in-out;
+}
+
+header>ul>li>a {
+    padding: 10px;
+    text-decoration: none;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header>ul>li>.active {
+    background: blueviolet;
+    color: white;
+    border-radius: 20px;
+    transition: 200ms ease-in-out;
+}
+
+header>ul>li>a:hover {
+    background: blueviolet;
+    color: white;
+    border-radius: 20px;
+    transition: 200ms ease-in-out;
+}
+
+.add-user-container {
+    width: 100%;
+    height: auto;
+}
+
+.add-user-container>form {
+    width: 70%;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.add-user-container>form>h2 {
+    color: blueviolet;
+}
+
+.add-user-container>form>.section {
+    width: 100%;
+    background: rgba(137, 43, 226, 0.064);
+    padding: 2rem;
+    border-radius: 20px;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    box-shadow: rgba(137, 43, 226, 0.169) 0px 2px 8px 0px;
+}
+
+.add-user-container>form .input-field {
+    width: 28%;
+}
+
+.add-user-container>form>.section .input-field>input,
+.add-user-container>form>.section .input-field>select {
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid blueviolet;
+}
+
+.add-user-container>form>.section>.input-field>label>span {
+    color: red;
+}
+
+.input-field-conditional {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: flex-end;
+    gap: 1rem;
+    width: auto;
+}
+
+.input-field-conditional>.input-field {
+    width: 50% !important;
+}
+
+.add-user-container>form>.section>.input-field-conditional>input,
+.add-user-container>form>.section>.input-field-conditional>select {
+    width: 50%;
+    padding: 7px 10px;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid blueviolet;
+}
+
+button[type="submit"] {
+    padding: 7px 20px;
+    border: 1px solid blueviolet;
+    background: blueviolet;
+    color: white;
+    font-weight: 400;
+    border-radius: 20px;
+    width: 10rem;
+    cursor: pointer;
+    margin-bottom: 5rem;
+}
+
+button[type="submit"]:hover {
+    color: blueviolet;
+    background: white;
+    transition: 200ms ease-in-out;
+}
+
+
+.user-table-container {
+    width: 100%;
+}
+
+.user-table-container .table {
+    width: 70%;
+}
