@@ -8,7 +8,12 @@
 }
 
 body {
-    background: whitesmoke;
+    background: white;
+}
+
+.invalid-msg {
+    color: red;
+    font-size: 14px;
 }
 
 .center {
@@ -100,9 +105,14 @@ header>ul>li>a:hover {
 }
 
 .add-user-container>form {
+    border: 1px solid rgba(137, 43, 226, 0.315);
+    padding: 1rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
     width: 70%;
     flex-direction: column;
     flex-wrap: wrap;
+    background: whitesmoke;
 }
 
 .add-user-container>form>h2 {
@@ -111,17 +121,28 @@ header>ul>li>a:hover {
 
 .add-user-container>form>.section {
     width: 100%;
-    background: rgba(137, 43, 226, 0.064);
+    background: #ffff;
     padding: 2rem;
     border-radius: 20px;
     gap: 1rem;
     flex-wrap: wrap;
+    border: 1px solid rgba(128, 0, 128, 0.057);
     margin-bottom: 2rem;
-    box-shadow: rgba(137, 43, 226, 0.169) 0px 2px 8px 0px;
+    /* box-shadow: rgba(137, 43, 226, 0.169) 0px 2px 8px 0px; */
 }
 
 .add-user-container>form .input-field {
-    width: 28%;
+    width: 47%;
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+input::placeholder {
+    font-size: 14px;
+    color: rgba(128, 128, 128, 0.516);
 }
 
 .add-user-container>form>.section .input-field>input,
@@ -129,8 +150,10 @@ header>ul>li>a:hover {
     width: 100%;
     padding: 7px 10px;
     border-radius: 20px;
+    padding-left: 1rem;
     outline: none;
-    border: 1px solid blueviolet;
+    /* background: rgba(137, 43, 226, 0.055); */
+    border: 1px solid rgba(137, 43, 226, 0.363);
 }
 
 .add-user-container>form>.section>.input-field>label>span {
@@ -138,15 +161,18 @@ header>ul>li>a:hover {
 }
 
 .input-field-conditional {
-    display: flex;
-    /* flex-direction: column; */
-    align-items: flex-end;
     gap: 1rem;
-    width: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .input-field-conditional>.input-field {
-    width: 50% !important;
+    width: 47% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .add-user-container>form>.section>.input-field-conditional>input,
@@ -159,15 +185,31 @@ header>ul>li>a:hover {
 }
 
 button[type="submit"] {
-    padding: 7px 20px;
-    border: 1px solid blueviolet;
     background: blueviolet;
+    border: 1px solid blueviolet;
     color: white;
+}
+
+.add-user button {
+    padding: 7px 20px;
     font-weight: 400;
     border-radius: 20px;
     width: 10rem;
     cursor: pointer;
-    margin-bottom: 5rem;
+    margin-bottom: 1rem;
+    margin-right: 10px;
+}
+
+button.cancel {
+    border: 1px solid blueviolet;
+    color: blueviolet;
+}
+
+button.cancel:hover {
+    background: blueviolet;
+    border: 1px solid blueviolet;
+    color: white;
+    transition: 200ms ease-in-out;
 }
 
 button[type="submit"]:hover {
@@ -179,8 +221,13 @@ button[type="submit"]:hover {
 
 .user-table-container {
     width: 100%;
+    padding: 2rem;
 }
 
-.user-table-container .table {
-    width: 70%;
+.container-fluid {
+    width: 80%;
 }
+
+/* .user-table-container .table {
+    width: 70%;
+} */

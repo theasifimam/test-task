@@ -1,34 +1,51 @@
 import { useFormik } from "formik";
 import React from "react";
-import { validationSchema } from "../utils";
+import { userSchema } from "../asset/utils";
+
+const initialValues = {
+  name: "",
+  age: "",
+  sex: "",
+  mobileNo: "",
+  dob: "",
+  idType: "aadhaarCard",
+  aadhaarNo: "",
+  panNo: "",
+  guardianLabel: "",
+  guardianName: "",
+  email: "",
+  emergencyNo: "",
+  address: "",
+  state: "",
+  city: "",
+  country: "",
+  occupation: "",
+  religion: "",
+  maritalStatus: "",
+  bloodGroup: "",
+  nationality: "",
+};
+
+const addUserAPI = async (values) => {
+  const response = await fetch("http://localhost:5000/add-user", {
+    method: "POST",
+    body: JSON.stringify(values),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
 
 const AddUser = () => {
   const { handleChange, handleSubmit, handleBlur, values, errors, touched } =
     useFormik({
-      initialValues: {
-        name: "",
-        dobAge: "",
-        sex: "",
-        mobileNo: "",
-        idType: "",
-        id: "",
-        guardianLabel: "",
-        guardianName: "",
-        email: "",
-        emergencyNo: "",
-        address: "",
-        state: "",
-        city: "",
-        country: "",
-        occupation: "",
-        religion: "",
-        maritalStatus: "",
-        bloodGroup: "",
-        nationality: "",
-      },
-      validationSchema,
+      initialValues,
+      validationSchema: userSchema,
       onSubmit: (values, action) => {
         console.log(values);
+        const response = addUserAPI(values);
+        console.log(response);
       },
     });
   return (
@@ -63,13 +80,13 @@ const AddUser = () => {
             <input
               type="text"
               placeholder="DD/MM/YYYY or Age in Years"
-              name="dobAge"
-              value={values.dobAge}
+              name="age"
+              value={values.age}
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.dobAge && touched.dobAge ? (
-              <p className="invalid-msg">{errors.dobAge}</p>
+            {errors.age && touched.age ? (
+              <p className="invalid-msg">{errors.age}</p>
             ) : null}
           </div>
 
@@ -106,7 +123,9 @@ const AddUser = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <p className="invalid-msg"></p>
+            {errors.mobileNo && touched.mobileNo ? (
+              <p className="invalid-msg">{errors.mobileNo}</p>
+            ) : null}
           </div>
 
           {/* Govt Issued ID  */}
@@ -126,17 +145,42 @@ const AddUser = () => {
               </select>
             </div>
 
-            <input
-              type="text"
-              name="id"
-              id="id"
-              placeholder="Enter Govt ID"
-              value={values.id}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            <p className="invalid-msg"></p>
+            <div className="input-field">
+              {values.idType === "aadhaarCard" ? (
+                <label htmlFor="aadhaarNo">Aadhaar Card </label>
+              ) : (
+                <label htmlFor="panNo">PAN Card </label>
+              )}
+              {values.idType === "aadhaarCard" ? (
+                <input
+                  type="text"
+                  name="aadhaarNo"
+                  id="aadhaarNo"
+                  placeholder="Enter aadhaarNo"
+                  value={values.aadhaarNo}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              ) : (
+                <input
+                  type="text"
+                  name="panNo"
+                  id="panNo"
+                  placeholder="Enter PAN number"
+                  value={values.panNo}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              )}
+            </div>
           </div>
+          {errors.aadhaarNo && touched.aadhaarNo ? (
+            <p className="invalid-msg">{errors.aadhaarNo}</p>
+          ) : null}
+
+          {errors.panNo && touched.panNo ? (
+            <p className="invalid-msg">{errors.panNo}</p>
+          ) : null}
         </div>
 
         <h2>Contact Details</h2>
@@ -163,16 +207,19 @@ const AddUser = () => {
               </select>
             </div>
 
-            <input
-              type="text"
-              name="guardianName"
-              id="guardianName"
-              placeholder="Enter Guardian Name"
-              value={values.guardianName}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            <p className="invalid-msg"></p>
+            <div className="input-field">
+              <label htmlFor="guardianName">Guardian Name </label>
+              <input
+                type="text"
+                name="guardianName"
+                id="guardianName"
+                placeholder="Enter Guardian Name"
+                value={values.guardianName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <p className="invalid-msg"></p>
+            </div>
           </div>
 
           {/* Email  */}
@@ -337,7 +384,10 @@ const AddUser = () => {
           </div>
         </div>
 
-        <button type="submit">Submit</button>
+        <div className="btn">
+          <button type="submit">Submit</button>
+          <button className="cancel">Cancel</button>
+        </div>
       </form>
     </div>
   );
