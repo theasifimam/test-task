@@ -6,22 +6,24 @@ import Layout from "./components/Layout";
 
 const App = () => {
   const [usersList, setUsersList] = useState([]);
-  // useEffect(() => {
-  //   const users = async () => {
-  //     const response = fetch("http://localhost:5000/all-users");
-  //     const result = await response.json();
-  //     setUsersList(result);
-  //   };
-  //   users();
-  // });
-
-  console.log(usersList);
+  const [reRenderUsers, setReRenderUsers] = useState(false);
+  useEffect(() => {
+    const users = async () => {
+      const response = await fetch("http://localhost:5000/all-users");
+      const result = await response.json();
+      setUsersList(result.users);
+    };
+    users();
+  }, [reRenderUsers]);
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Users usersList={usersList} />} />
-          <Route path="/add-user" element={<AddUser />} />
+          <Route
+            path="/add-user"
+            element={<AddUser setReRenderUsers={setReRenderUsers} />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

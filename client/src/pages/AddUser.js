@@ -1,6 +1,8 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { userSchema } from "../asset/utils";
+import { state } from "../asset/data";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   name: "",
@@ -26,28 +28,38 @@ const initialValues = {
   nationality: "",
 };
 
-const addUserAPI = async (values) => {
-  const response = await fetch("http://localhost:5000/add-user", {
-    method: "POST",
-    body: JSON.stringify(values),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  return await response.json();
-};
+const AddUser = ({ setReRenderUsers }) => {
+  const [result, setResult] = useState({});
+  const navigate = useNavigate();
+  const addUserAPI = async (values) => {
+    const response = await fetch("http://localhost:5000/add-user", {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    setReRenderUsers(true);
+    const result = await response.json();
+    setResult(result);
+    alert(result.status);
+  };
 
-const AddUser = () => {
+  useEffect(() => {
+    if (result?.status === "success") {
+      navigate("/");
+    }
+  }, [result]);
+
   const { handleChange, handleSubmit, handleBlur, values, errors, touched } =
     useFormik({
       initialValues,
       validationSchema: userSchema,
       onSubmit: (values, action) => {
-        console.log(values);
-        const response = addUserAPI(values);
-        console.log(response);
+        addUserAPI(values);
       },
     });
+
   return (
     <div className="add-user-container center">
       <form onSubmit={handleSubmit} className="center">
@@ -247,7 +259,9 @@ const AddUser = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <p className="invalid-msg"></p>
+            {errors.emergencyNo && touched.emergencyNo ? (
+              <p className="invalid-msg">{errors.emergencyNo}</p>
+            ) : null}
           </div>
         </div>
 
@@ -271,9 +285,14 @@ const AddUser = () => {
           <div className="input-field">
             <label htmlFor="state">State</label>
             <select name="state" id="state">
-              <option value="bihar">Bihar</option>
-              <option value="up">UP</option>
-              <option value="punjab">Punjab</option>
+              <option>Select</option>
+              {state.map((state, index) => {
+                return (
+                  <option key={index} value={index}>
+                    {state}
+                  </option>
+                );
+              })}
             </select>
             <p className="invalid-msg"></p>
           </div>
@@ -281,11 +300,14 @@ const AddUser = () => {
           {/* City  */}
           <div className="input-field">
             <label htmlFor="city">City</label>
-            <select name="city" id="city">
-              <option value="darbhanga">Darbhanga</option>
-              <option value="muzaffarpur">Muzaffarpur</option>
-              <option value="Patna">Patna</option>
-            </select>
+            <input
+              type="text"
+              name="city"
+              id="city"
+              placeholder="City"
+              value={values.city}
+              onChange={handleChange}
+            />
             <p className="invalid-msg"></p>
           </div>
 
@@ -329,6 +351,8 @@ const AddUser = () => {
               value={values.religion}
               onChange={handleChange}
             >
+              {" "}
+              <option>Select</option>
               <option value="islam">Islam</option>
               <option value="christianity">Christianity</option>
               <option value="hinduism">Hinduism</option>
@@ -347,6 +371,8 @@ const AddUser = () => {
               value={values.maritalStatus}
               onChange={handleChange}
             >
+              {" "}
+              <option>Select</option>
               <option value="single">Single</option>
               <option value="Married">Married</option>
               <option value="divorced">Divorced</option>
@@ -354,15 +380,16 @@ const AddUser = () => {
             <p className="invalid-msg"></p>
           </div>
 
-          {/* Religion  */}
+          {/* Blood Group  */}
           <div className="input-field">
-            <label htmlFor="bloodGroup">Religion</label>
+            <label htmlFor="bloodGroup">Blood Group</label>
             <select
               name="bloodGroup"
               id="bloodGroup"
               value={values.bloodGroup}
               onChange={handleChange}
             >
+              <option>Select</option>
               <option value="b+">B+ve</option>
               <option value="a+">A+ve</option>
               <option value="b-">B-ve</option>
@@ -385,7 +412,9 @@ const AddUser = () => {
         </div>
 
         <div className="btn">
-          <button type="submit">Submit</button>
+          <button type="submit" className="submit">
+            Submit
+          </button>
           <button className="cancel">Cancel</button>
         </div>
       </form>

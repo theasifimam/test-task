@@ -106,10 +106,10 @@ header>ul>li>a:hover {
 
 .add-user-container>form {
     border: 1px solid rgba(137, 43, 226, 0.315);
-    padding: 1rem;
+    padding: 3rem 6rem;
     border-radius: 2rem;
     margin-bottom: 2rem;
-    width: 70%;
+    width: 90%;
     flex-direction: column;
     flex-wrap: wrap;
     background: whitesmoke;
@@ -133,7 +133,7 @@ header>ul>li>a:hover {
 
 .add-user-container>form .input-field {
     width: 47%;
-    height: 5rem;
+    height: 4rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -200,9 +200,17 @@ button[type="submit"] {
     margin-right: 10px;
 }
 
+.btn>button {
+    padding: 8px 25px;
+    border-radius: 40px;
+    margin: 0rem 1rem;
+    cursor: pointer;
+}
+
 button.cancel {
     border: 1px solid blueviolet;
     color: blueviolet;
+
 }
 
 button.cancel:hover {
@@ -225,7 +233,7 @@ button[type="submit"]:hover {
 }
 
 .container-fluid {
-    width: 80%;
+    width: 90%;
 }
 
 /* .user-table-container .table {

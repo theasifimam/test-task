@@ -48,26 +48,14 @@ const names = [
   },
 ];
 
-const Users = () => {
-  const [usersList, setUsersList] = useState([]);
-  useEffect(() => {
-    const users = async () => {
-      const response = await fetch("http://localhost:5000/all-users");
-      const result = await response.json();
-      setUsersList(result.users);
-    };
-    users();
-  }, []);
-
-  console.log(usersList);
-
+const Users = ({ usersList }) => {
   useEffect(() => {
     if (!$.fn.DataTable.isDataTable("#myTable")) {
       $(document).ready(function () {
         setTimeout(function () {
           $("#table").DataTable({
             pagingType: "full_numbers",
-            pageLength: 20,
+            pageLength: 5,
             processing: true,
             dom: "Bfrtip",
             select: {
@@ -123,6 +111,7 @@ const Users = () => {
                 },
               },
             ],
+            bDestroy: true,
           });
         }, 1000);
       });
@@ -136,11 +125,15 @@ const Users = () => {
           <tr>
             <td className="text-xs font-weight-bold">{index + 1}</td>
             <td className="text-xs font-weight-bold">{item.name}</td>
-            <td className="text-xs font-weight-bold">{item.ageSex}</td>
-            <td className="text-xs font-weight-bold">{item.mobile}</td>
+            <td className="text-xs font-weight-bold">
+              {item.age}/{item.sex}
+            </td>
+            <td className="text-xs font-weight-bold">{item.mobileNo}</td>
             <td className="text-xs font-weight-bold">{item.address}</td>
-            <td className="text-xs font-weight-bold">{item.govtId}</td>
-            <td className="text-xs font-weight-bold">{item.guardian}</td>
+            <td className="text-xs font-weight-bold">
+              {item.aadhaarNo || item.panNo}
+            </td>
+            <td className="text-xs font-weight-bold">{item.guardianName}</td>
             <td className="text-xs font-weight-bold">{item.nationality}</td>
             <td></td>
           </tr>

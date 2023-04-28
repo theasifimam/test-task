@@ -35,11 +35,12 @@ app.post("/add-user", async (req, res) => {
       bloodGroup: req.body?.bloodGroup,
       nationality: req.body?.nationality,
     });
+    res.json({ status: "success", message: "User added sucessfully." });
   } catch (error) {
     console.log(error.message);
     res.json({ status: "error", message: "Duplicate email." });
   }
-  res.json({ status: "Ok" });
+  // res.json({ status: "Ok" });
 });
 
 app.get("/all-users", async (req, res) => {
