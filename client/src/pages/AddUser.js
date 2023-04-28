@@ -230,7 +230,10 @@ const AddUser = ({ setReRenderUsers }) => {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              <p className="invalid-msg"></p>
+
+              {errors.guardianName && touched.guardianName ? (
+                <p className="invalid-msg">{errors.guardianName}</p>
+              ) : null}
             </div>
           </div>
 
@@ -294,7 +297,9 @@ const AddUser = ({ setReRenderUsers }) => {
                 );
               })}
             </select>
-            <p className="invalid-msg"></p>
+            {errors.state && touched.state ? (
+              <p className="invalid-msg">{errors.state}</p>
+            ) : null}
           </div>
 
           {/* City  */}
@@ -308,10 +313,12 @@ const AddUser = ({ setReRenderUsers }) => {
               value={values.city}
               onChange={handleChange}
             />
-            <p className="invalid-msg"></p>
+            {errors.city && touched.city ? (
+              <p className="invalid-msg">{errors.city}</p>
+            ) : null}
           </div>
 
-          {/* Mobile  */}
+          {/* Country  */}
           <div className="input-field">
             <label htmlFor="country">Country</label>
             <input
@@ -322,7 +329,9 @@ const AddUser = ({ setReRenderUsers }) => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <p className="invalid-msg"></p>
+            {errors.country && touched.country ? (
+              <p className="invalid-msg">{errors.country}</p>
+            ) : null}
           </div>
         </div>
 
@@ -339,7 +348,9 @@ const AddUser = ({ setReRenderUsers }) => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <p className="invalid-msg"></p>
+            {errors.occupation && touched.occupation ? (
+              <p className="invalid-msg">{errors.occupation}</p>
+            ) : null}
           </div>
 
           {/* Religion  */}
@@ -359,7 +370,9 @@ const AddUser = ({ setReRenderUsers }) => {
               <option value="sikhism">Sikhism</option>
               <option value="budhism">Budhism</option>
             </select>
-            <p className="invalid-msg"></p>
+            {errors.religion && touched.religion ? (
+              <p className="invalid-msg">{errors.religion}</p>
+            ) : null}
           </div>
 
           {/* Marital Status  */}
@@ -377,7 +390,9 @@ const AddUser = ({ setReRenderUsers }) => {
               <option value="Married">Married</option>
               <option value="divorced">Divorced</option>
             </select>
-            <p className="invalid-msg"></p>
+            {errors.maritalStatus && touched.maritalStatus ? (
+              <p className="invalid-msg">{errors.maritalStatus}</p>
+            ) : null}
           </div>
 
           {/* Blood Group  */}
